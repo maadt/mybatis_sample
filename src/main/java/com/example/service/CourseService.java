@@ -20,4 +20,27 @@ public class CourseService {
     public List<Course> findAll() {
         return this.courseMapper.findAll();
     }
+    
+    public void insert(String name) {
+    	Course course = new Course();
+    	course.setName(name);
+        this.courseMapper.insert(course);
+    }
 }
+
+/* 登録時のデータを利用する場合
+@Service
+public class SampleService {
+    public Sample sampleInsert(String name) {
+        Sample sample = new Sample();
+        sample.setName(name);
+        // 登録前はIDは「0」（初期値）
+        System.out.println(sample.getId());
+        // 登録処理 自動採番されたIDをEntityに設定
+        this.courseMapper.insert(sample);
+        // IDに自動採番された値を取得できる
+        System.out.println(sample.getId());
+        // 登録完了時の状態を呼び出し元に返す
+        return sample;
+    }
+*/

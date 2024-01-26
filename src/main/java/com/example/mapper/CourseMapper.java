@@ -21,4 +21,5 @@ import com.example.entity.Course;
 @Mapper
 public interface CourseMapper {
     public List<Course> findAll();
+    public void insert(Course course); //新規登録処理
 }

@@ -20,5 +20,13 @@
             </tr>
         </tbody>
     </table>
+    <h1>新規登録フォーム</h1>
+    <form th:action="@{/course/create}" th:object="${courseForm}" th:method="post">
+        <div>
+            <label>コース名</label>
+            <input type="text" th:field="*{name}">
+        </div>
+        <input type="submit" value="送信">
+    </form>
 </body>
 </html>
