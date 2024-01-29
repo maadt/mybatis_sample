@@ -20,7 +20,7 @@
         keyColumn="自動採番されるカラム名"
         keyProperty="格納されるEntityのフィールド名">
      -->
-        INSERT INTO COURSES (ID, NAME) VALUES (nextval('course_id_seq'), #{name})
+        INSERT INTO COURSES (id, name) VALUES (nextval('course_id_seq'), #{name})
         <!-- 
             INSERT INTO テーブル名 (カラム名) VALUES (#{クラスのフィールド名})
          -->
