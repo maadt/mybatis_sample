@@ -13,14 +13,14 @@
     </select>
     
     <!-- 新規登録処理 -->
-    <insert id="insert" useGeneratedKeys="true" keyColumn="ID" keyProperty="id">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     <!-- 
         id="Mapperインターフェースのメソッド名"
         useGeneratedKeys="自動採番された値をEntityのフィールドに格納したい場合はtrue、そうでない場合はfalse"
         keyColumn="自動採番されるカラム名"
         keyProperty="格納されるEntityのフィールド名">
      -->
-        INSERT INTO COURSES (id, name) VALUES (nextval('course_id_seq'), #{name})
+        INSERT INTO COURSES (ID, NAME) VALUES (nextval('course_id_seq'), #{name})
         <!-- 
             INSERT INTO テーブル名 (カラム名) VALUES (#{クラスのフィールド名})
          -->
