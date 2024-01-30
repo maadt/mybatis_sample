@@ -40,4 +40,7 @@
 		UPDATE courses SET name = #{name} WHERE id = #{id}
 		<!-- SELECT * FROM (テーブル名) WHERE カラム名 = #{引数名} -->
 	</update>
+	<delete id="deleteById">
+		DELETE FROM COURSES WHERE ID = #{id}
+	</delete>
 </mapper>

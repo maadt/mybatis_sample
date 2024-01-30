@@ -51,4 +51,10 @@ public class CourseController {
 		this.courseService.update(id, courseForm.getName());
 		return "redirect:/course/list";
 	}
+	
+	@PostMapping("/delete/{id}")
+	    public String delete(@PathVariable Integer id) {
+		this.courseService.deleteById(id);
+		return "redirect:/course/list";
+	 }
 }

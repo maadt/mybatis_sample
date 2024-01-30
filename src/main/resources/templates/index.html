@@ -17,6 +17,11 @@
             <tr th:each="course : ${courses}">
                 <td th:text="${course.id}"></td>
                 <td th:text="${course.name}"></td>
+                <td>
+                    <form th:action="@{/course/delete/{id}(id=${course.id})}" th:method="post">
+                        <input type="submit" value="削除">
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>

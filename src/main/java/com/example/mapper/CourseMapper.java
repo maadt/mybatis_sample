@@ -24,4 +24,5 @@ public interface CourseMapper {
     public void insert(Course course); //新規登録処理   
     public Course findById(Integer id);//一件取得処理
     public void update(Course course);//更新処理
+    public void deleteById(Integer id);//削除処理
 }

@@ -37,6 +37,10 @@ public class CourseService {
 		course.setName(name);
 		this.courseMapper.update(course);
 	}
+	
+	public void deleteById(Integer id) {
+		 this.courseMapper.deleteById(id);
+	}
 }
 
 /* 登録時のデータを利用する場合
