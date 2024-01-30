@@ -5,6 +5,7 @@ package com.example.entity;
 public class Course {
     private int id;
     private String name;
+    private CourseDetail courseDetail;
 
     public int getId() {
         return id;
@@ -17,5 +18,11 @@ public class Course {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public CourseDetail getCourseDetail() {
+        return courseDetail;
+    }
+    public void setCourseDetail(CourseDetail courseDetail) {
+        this.courseDetail = courseDetail;
     }
 }
