@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CourseMapper">
+	<resultMap type="com.example.entity.Course" id="courseMap">
+		<!-- resultMap：クエリの実行結果をJavaオブジェクトにどのようにセットするかを定義する -->
+		<!-- type：このマップが対象とするJavaオブジェクトの型 -->
+		<!-- id：要素の識別子 -->
+		<id column="ID" property="id" />
+		<!-- id：マッピングするための一意キーとフィールドを定義する -->
+		<!-- column：データベースのカラム -->
+		<!-- property：データベースのカラムに対応するJavaオブジェクトのフィールド -->
+		<result column="NAME" property="name" />
+		<!-- result：マッピングするキーとフィールドを定義する -->
+	</resultMap>
+	<!-- 全件取得処理 -->
+	<select id="findAll" resultMap="courseMap">
+		<!-- select：SQLクエリ -->
+		<!-- id： Mapperインターフェースのメソッド名（） -->
+		SELECT * FROM courses
+		<where>
+			<!-- where：条件が一つもない場合はWHERE句を挿入しない -->
+			<if test="courseId != null">
+				<!-- if：条件式の定義 -->
+				<!-- test：Javaベースの条件式を定義 -->
+				id = #{courseId}
+			</if>
+			<if test="courseName != null">
+				OR name = #{courseName}
+			</if>
+		</where>
+	</select>
+	<!-- 一件取得処理 -->
+	<select id="findById" resultMap="courseMap">
+		SELECT * FROM courses
+		WHERE id =
+		#{id}
+	</select>
+	<!-- 新規登録処理 -->
+	<insert id="insert" useGeneratedKeys="true" keyColumn="id"
+		keyProperty="id">
+		<!-- id="Mapperインターフェースのメソッド名" useGeneratedKeys="自動採番された値をEntityのフィールドに格納したい場合はtrue、そうでない場合はfalse" 
+			keyColumn="自動採番されるカラム名" keyProperty="格納されるEntityのフィールド名"> -->
+		INSERT INTO courses (id, name) VALUES (nextval('course_id_seq'),
+		#{name})
+		<!-- INSERT INTO テーブル名 (カラム名) VALUES (#{クラスのフィールド名}) -->
+	</insert>
+	<!-- 更新処理 -->
+	<update id="update">
+		UPDATE courses SET name = #{name} WHERE id = #{id}
+		<!-- SELECT * FROM (テーブル名) WHERE カラム名 = #{引数名} -->
+	</update>
+	<delete id="deleteById">
+		DELETE FROM COURSES WHERE ID = #{id}
+	</delete>
+</mapper>
