@@ -22,6 +22,12 @@
 		<!-- <association property="フィールド名" javaType="追加したEntityのクラスパス"> <id column="結合したテーブルの主キーとなるカラム名" 
 			property="追加したEntityのフィールド名"/> <result column="結合したテーブルのカラム名" property="追加したEntityのフィールド名"/> 
 			</association> -->
+		<collection property="chapters"
+			ofType="com.example.entity.Chapter">
+			<id column="CH_ID" property="id" />
+			<result column="CH_NAME" property="name" />
+		</collection>
+		<!-- collection：1対多の関係をマッピングするために使用 -->
 	</resultMap>
 	<!-- 全件取得処理 -->
 	<select id="findAll" resultMap="courseMap">
@@ -48,12 +54,18 @@
 		,CD.ID AS CD_ID
 		<!-- COURSES_DETAISのIDカラムを「CD_ID」とする（resultMapで重複するカラム名を判別させるため） -->
 		,CD.DESCRIPTION
+		,CH.ID AS CH_ID
+		,CH.NAME AS CH_NAME
 		FROM
 		COURSES C<!-- COURSESのエイリアスを「C」とする -->
 		INNER JOIN
 		COURSE_DETAILS CD
 		ON
 		C.ID = CD.COURSES_ID
+		INNER JOIN
+		CHAPTERS CH
+		ON
+		C.ID = CH.COURSES_ID
 		WHERE
 		C.ID = #{id}<!-- 特定のコースID (#{id}) に関連するレコードのみを選択 -->
 	</select>
@@ -62,7 +74,8 @@
 		keyProperty="id">
 		<!-- id="Mapperインターフェースのメソッド名" useGeneratedKeys="自動採番された値をEntityのフィールドに格納したい場合はtrue、そうでない場合はfalse" 
 			keyColumn="自動採番されるカラム名" keyProperty="格納されるEntityのフィールド名"> -->
-		INSERT INTO courses (id, name) VALUES (nextval('course_id_seq'), #{name})
+		INSERT INTO courses (id, name) VALUES (nextval('course_id_seq'),
+		#{name})
 		<!-- INSERT INTO テーブル名 (カラム名) VALUES (#{クラスのフィールド名}) -->
 	</insert>
 	<!-- 更新処理 -->
