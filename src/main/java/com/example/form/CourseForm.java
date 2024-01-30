@@ -1,5 +1,7 @@
 package com.example.form;
 
+// htmlのformタグから値を受け取り、オブジェクトを保持する
+
 public class CourseForm {
 	private String name;
 

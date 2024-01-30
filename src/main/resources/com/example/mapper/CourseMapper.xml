@@ -4,11 +4,21 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.CourseMapper">
     <resultMap type="com.example.entity.Course" id="courseMap">
+    <!-- resultMap：クエリの実行結果をJavaオブジェクトにどのようにセットするかを定義する -->
+    <!-- type：このマップが対象とするJavaオブジェクトの型 -->
+    <!-- id：要素の識別子 -->
         <id column="ID" property="id"/>
+        <!-- id：マッピングするための一意キーとフィールドを定義する -->
+        <!-- column：データベースのカラム -->
+        <!-- property：データベースのカラムに対応するJavaオブジェクトのフィールド -->
         <result column="NAME" property="name"/>
+        <!-- result：マッピングするキーとフィールドを定義する-->
     </resultMap>
-
+    
+    <!-- データ取得処理 -->
     <select id="findAll" resultMap="courseMap">
+    <!-- select：SQLクエリ -->
+    <!-- id： Mapperインターフェースのメソッド名（）-->
         SELECT * FROM COURSES
     </select>
     
@@ -20,7 +30,7 @@
         keyColumn="自動採番されるカラム名"
         keyProperty="格納されるEntityのフィールド名">
      -->
-        INSERT INTO COURSES (ID, NAME) VALUES (nextval('course_id_seq'), #{name})
+        INSERT INTO COURSES (id, name) VALUES (nextval('course_id_seq'), #{name})
         <!-- 
             INSERT INTO テーブル名 (カラム名) VALUES (#{クラスのフィールド名})
          -->

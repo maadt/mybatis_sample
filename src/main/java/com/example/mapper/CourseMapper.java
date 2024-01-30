@@ -20,6 +20,6 @@ import com.example.entity.Course;
 
 @Mapper
 public interface CourseMapper {
-    public List<Course> findAll();
+    public List<Course> findAll();//全件取得処理
     public void insert(Course course); //新規登録処理
 }

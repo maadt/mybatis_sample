@@ -22,9 +22,11 @@
     </table>
     <h1>新規登録フォーム</h1>
     <form th:action="@{/course/create}" th:object="${courseForm}" th:method="post">
+	<!--th:object：form要素がバインドされるオブジェクトを定義-->
         <div>
             <label>コース名</label>
             <input type="text" th:field="*{name}">
+            <!--th:field：入力値の代入先（バインドしたオブジェクトのフィールド）を定義する-->
         </div>
         <input type="submit" value="送信">
     </form>
