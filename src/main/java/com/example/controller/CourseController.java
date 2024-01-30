@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,23 +18,37 @@ import com.example.service.CourseService;
 @Controller
 @RequestMapping("/course")
 public class CourseController {
-    private final CourseService courseService;
+	private final CourseService courseService;
 
-    @Autowired
-    public CourseController(CourseService courseService) {
-        this.courseService = courseService;
-    }
+	@Autowired
+	public CourseController(CourseService courseService) {
+		this.courseService = courseService;
+	}
 
-    @GetMapping("/list")
-    public String index(Model model, @ModelAttribute CourseForm courseForm) {
-        List<Course> courses = this.courseService.findAll();
-        model.addAttribute("courses", courses);
-        return "index";
-    }
-    
-    @PostMapping("/create")
-    public String create(@ModelAttribute CourseForm courseForm) {
-        this.courseService.insert(courseForm.getName());
-        return "redirect:/course/list";
-    }
+	@GetMapping("/list")
+	public String index(Model model, @ModelAttribute CourseForm courseForm) {
+		List<Course> courses = this.courseService.findAll();
+		model.addAttribute("courses", courses);
+		return "index";
+	}
+
+	@PostMapping("/create")
+	public String create(@ModelAttribute CourseForm courseForm) {
+		this.courseService.insert(courseForm.getName());
+		return "redirect:/course/list";
+	}
+
+	@GetMapping("/edit/{id}")
+	public String showEdit(@PathVariable Integer id, Model model, @ModelAttribute CourseForm courseForm) {
+		Course course = this.courseService.findById(id);
+		courseForm.setName(course.getName());
+		model.addAttribute("id", id);
+		return "edit";
+	}
+
+	@PostMapping("/edit/{id}")
+	public String edit(@PathVariable Integer id, @ModelAttribute CourseForm courseForm) {
+		this.courseService.update(id, courseForm.getName());
+		return "redirect:/course/list";
+	}
 }

@@ -14,14 +14,18 @@
 		<result column="NAME" property="name" />
 		<!-- result：マッピングするキーとフィールドを定義する -->
 	</resultMap>
-
-	<!-- データ取得処理 -->
+	<!-- 全件取得処理 -->
 	<select id="findAll" resultMap="courseMap">
 		<!-- select：SQLクエリ -->
 		<!-- id： Mapperインターフェースのメソッド名（） -->
-		SELECT * FROM COURSES
+		SELECT * FROM courses
 	</select>
-
+	<!-- 一件取得処理 -->
+	<select id="findById" resultMap="courseMap">
+		SELECT * FROM courses
+		WHERE id =
+		#{id}
+	</select>
 	<!-- 新規登録処理 -->
 	<insert id="insert" useGeneratedKeys="true" keyColumn="id"
 		keyProperty="id">
@@ -31,4 +35,9 @@
 		#{name})
 		<!-- INSERT INTO テーブル名 (カラム名) VALUES (#{クラスのフィールド名}) -->
 	</insert>
+	<!-- 更新処理 -->
+	<update id="update">
+		UPDATE courses SET name = #{name} WHERE id = #{id}
+		<!-- SELECT * FROM (テーブル名) WHERE カラム名 = #{引数名} -->
+	</update>
 </mapper>

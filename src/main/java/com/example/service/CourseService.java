@@ -10,22 +10,33 @@ import com.example.mapper.CourseMapper;
 
 @Service
 public class CourseService {
-    private final CourseMapper courseMapper;
+	private final CourseMapper courseMapper;
 
-    @Autowired
-    public CourseService(CourseMapper courseMapper) {
-        this.courseMapper = courseMapper;
-    }
+	@Autowired
+	public CourseService(CourseMapper courseMapper) {
+		this.courseMapper = courseMapper;
+	}
 
-    public List<Course> findAll() {
-        return this.courseMapper.findAll();
-    }
-    
-    public void insert(String name) {
-    	Course course = new Course();
-    	course.setName(name);
-        this.courseMapper.insert(course);
-    }
+	public List<Course> findAll() {
+		return this.courseMapper.findAll();
+	}
+
+	public void insert(String name) {
+		Course course = new Course();
+		course.setName(name);
+		this.courseMapper.insert(course);
+	}
+
+	public Course findById(Integer id) {
+		return this.courseMapper.findById(id);
+	}
+
+	public void update(Integer id, String name) {
+		Course course = new Course();
+		course.setId(id);
+		course.setName(name);
+		this.courseMapper.update(course);
+	}
 }
 
 /* 登録時のデータを利用する場合
