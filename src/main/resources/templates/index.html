@@ -27,6 +27,7 @@
             <label>コース名</label>
             <input type="text" th:field="*{name}">
             <!--th:field：入力値の代入先（バインドしたオブジェクトのフィールド）を定義する-->
+            <!--*：現在の選択されているオブジェクトに対して直接アクセスする-->
         </div>
         <input type="submit" value="送信">
     </form>
