@@ -15,14 +15,19 @@ package com.example.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.entity.Course;
 
 @Mapper
 public interface CourseMapper {
     public List<Course> findAll();//全件取得処理
+    public List<Course> findAll(@Param("courseId") Integer courseId
+    		                    , @Param("courseName") String courseName);//条件検索処理
+    //@Param：メソッドが受け取るパラメータを指定する
     public void insert(Course course); //新規登録処理   
     public Course findById(Integer id);//一件取得処理
     public void update(Course course);//更新処理
     public void deleteById(Integer id);//削除処理
+    
 }

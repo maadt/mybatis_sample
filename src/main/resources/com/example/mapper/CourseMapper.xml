@@ -19,6 +19,17 @@
 		<!-- select：SQLクエリ -->
 		<!-- id： Mapperインターフェースのメソッド名（） -->
 		SELECT * FROM courses
+		<where>
+			<!-- where：条件が一つもない場合はWHERE句を挿入しない -->
+			<if test="courseId != null">
+				<!-- if：条件式の定義 -->
+				<!-- test：Javaベースの条件式を定義 -->
+				id = #{courseId}
+			</if>
+			<if test="courseName != null">
+				OR name = #{courseName}
+			</if>
+		</where>
 	</select>
 	<!-- 一件取得処理 -->
 	<select id="findById" resultMap="courseMap">

@@ -5,6 +5,19 @@
     <title>MyBatisサンプル</title>
 </head>
 <body>
+	<h1>検索フォーム</h1>
+    <form th:action="@{/course/list}" th:method="get">
+        <div>
+            <label>コースID</label>
+            <input type="number" name="courseId">
+            <!--name：パラメータ名を定義する-->
+        </div>
+        <div>
+            <label>コース名</label>
+            <input type="text" name="courseName">
+        </div>
+        <input type="submit" value="検索">
+    </form>
     <h1>コース一覧</h1>
     <table>
         <thead>

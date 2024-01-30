@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.entity.Course;
 import com.example.form.CourseForm;
@@ -26,10 +27,18 @@ public class CourseController {
 	}
 
 	@GetMapping("/list")
-	public String index(Model model, @ModelAttribute CourseForm courseForm) {
-		List<Course> courses = this.courseService.findAll();
-		model.addAttribute("courses", courses);
-		return "index";
+	public String index(Model model,
+	        @ModelAttribute CourseForm courseForm,
+	        @RequestParam(value = "courseId", required = false) Integer courseId,
+	        @RequestParam(value = "courseName", required = false) String courseName) {
+		    //value：HTTPリクエストに含まれるパラメータ名（HTMLから参照する）
+		    //required：リクエストに特定のパラメータが含まれている必要があるかどうかを指定する（デフォルトでtrue）
+		    //true：リクエストにそのパラメータが必須
+		    //false：リクエストにそのパラメータが任意
+		List<Course> courses = this.courseService.findAll(courseId, courseName);
+		//パラメータを引数に追加
+	    model.addAttribute("courses", courses);
+	    return "index";
 	}
 
 	@PostMapping("/create")
